@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="おきとう歯科クリニック 歯科衛生士採用ガイド">
+<!-- 入口は okitodental.com/recruit の iframe。配信元URLが直接検索に載らないようにする -->
+<meta name="robots" content="noindex, nofollow">
+<title>DH採用｜おきとう歯科クリニック</title>
+<style>
+  :root {
+    --main: #E08A3C;
+    --deep: #B96F26;
+    --pale: #FBF1E3;
+    --ivory: #FDF8F0;
+    --sky: #7FB5D5;
+    --wakakusa: #93C08B;
+    --accent: #D97A8C;
+    --text: #3F3A3A;
+    --dark: #2E2A2A;
+    --line: #06C755;
+    --line-dark: #05a847;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* ── Progress ── */
+  .progress-wrap {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    padding-top: var(--safe-top);
+    background: rgba(46,42,42,.88);
+  }
+  .progress-bar { height: 3px; background: rgba(255,255,255,.15); }
+  .progress-fill {
+    height: 100%; width: 0%;
+    background: var(--main);
+    transition: width .35s ease;
+  }
+  .progress-label {
+    text-align: center;
+    font-size: .72rem;
+    color: rgba(255,255,255,.75);
+    padding: .35rem .5rem .45rem;
+    letter-spacing: .06em;
+  }
+
+  /* ── Slides ── */
+  #deck {
+    height: 100dvh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .slide {
+    min-height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    background: var(--ivory);
+    position: relative;
+  }
+  .slide.dark-slide { background: var(--dark); color: #fff; }
+
+  /* Photo areas — 縦長スマホ向け：切らず全体表示 */
+  .slide-photo {
+    position: relative;
+    flex: none;
+    overflow: hidden;
+    background: #ebe4da;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide-photo.shot {
+    height: min(70vh, 560px);
+    min-height: 300px;
+    flex: 1;
+  }
+  .slide-photo.shot-sm {
+    height: min(58vh, 460px);
+    min-height: 260px;
+  }
+  .slide-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .slide-photo.hero-img img {
+    object-fit: cover;
+    object-position: center 20%;
+  }
+  .slide-photo.map img {
+    object-fit: contain;
+    background: #fff;
+    padding: .65rem;
+  }
+  .cap {
+    position: absolute; right: 0; bottom: 0;
+    background: rgba(253,248,240,.94);
+    color: var(--deep);
+    font-size: .78rem;
+    padding: .4rem .75rem;
+    border-radius: 8px 0 0 0;
+    max-width: 90%;
+    line-height: 1.4;
+  }
+
+  /* Content */
+  .slide-body {
+    flex: 1;
+    padding: 1.15rem 1.25rem 5.5rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .slide-body.center { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .slide-body.compact { padding-top: .85rem; }
+
+  .band {
+    background: var(--main);
+    color: #fff;
+    padding: .85rem 1.25rem;
+    flex: none;
+  }
+  .band-label {
+    font-family: Montserrat, sans-serif;
+    font-size: .68rem;
+    letter-spacing: .28em;
+    opacity: .88;
+    display: block;
+    margin-bottom: .2rem;
+  }
+  .band-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  .catch {
+    font-size: clamp(1.45rem, 6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.55;
+    color: #fff;
+    margin: 0;
+    letter-spacing: .02em;
+  }
+  .catch-sub {
+    font-size: 1.05rem;
+    color: var(--deep);
+    font-weight: 700;
+    margin: 0 0 .75rem;
+  }
+  .lead {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin: 0 0 .85rem;
+  }
+  .lead:last-child { margin-bottom: 0; }
+  .tagline { color: var(--deep); font-weight: 700; }
+
+  h2.slide-h {
+    margin: 0 0 .85rem;
+    font-size: 1.25rem;
+    color: var(--dark);
+    line-height: 1.5;
+  }
+  h3.slide-h3 {
+    margin: 0 0 .65rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  h3.out { color: var(--deep); }
+  h3.visit { color: #4a8aad; }
+
+  .en {
+    font-family: Montserrat, sans-serif;
+    color: var(--main);
+    letter-spacing: .2em;
+    font-weight: 700;
+    font-size: .78rem;
+  }
+
+  /* Cards & lists */
+  .card {
+    background: #fff;
+    border: 1px solid #eedfc9;
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    margin-bottom: .75rem;
+  }
+  .card:last-child { margin-bottom: 0; }
+  .card-name { color: var(--deep); font-weight: 700; font-size: 1.05rem; }
+  .card-role { font-size: .82rem; color: #7a7570; margin-top: .15rem; }
+  .card-text { font-size: 1rem; line-height: 1.8; margin: .65rem 0 0; }
+
+  .values { display: flex; flex-direction: column; gap: .65rem; }
+  .value-card {
+    background: #fff;
+    border: 1px solid #eedfc9;
+    border-radius: 14px;
+    padding: .9rem 1rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .chip {
+    display: inline-block;
+    font-size: .72rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--sky);
+    border-radius: 99px;
+    padding: .15rem .55rem;
+    margin-right: .35rem;
+    vertical-align: middle;
+  }
+  .chip.g { background: var(--wakakusa); }
+  .chip.o { background: var(--main); }
+  .chip.p { background: var(--accent); }
+
+  ul.big-list {
+    margin: 0; padding-left: 1.2rem;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  ul.big-list li { margin-bottom: .55rem; }
+  ul.big-list li:last-child { margin-bottom: 0; }
+
+  .note {
+    background: var(--pale);
+    border-radius: 12px;
+    padding: .85rem 1rem;
+    font-size: .95rem;
+    color: var(--deep);
+    line-height: 1.7;
+    margin-top: .85rem;
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .55rem;
+  }
+  .stat {
+    background: #fff;
+    border: 1.5px solid var(--main);
+    border-radius: 12px;
+    padding: .75rem .35rem;
+    text-align: center;
+    font-size: .78rem;
+    line-height: 1.35;
+  }
+  .stat b {
+    display: block;
+    font-size: 1.45rem;
+    color: var(--deep);
+    line-height: 1.15;
+    margin-bottom: .1rem;
+  }
+  .stat-note { font-size: .78rem; color: #8a8080; margin-top: .65rem; }
+
+  /* Greeting faces */
+  .person {
+    display: flex;
+    gap: .85rem;
+    align-items: flex-start;
+    margin-bottom: .5rem;
+  }
+  .face {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex: none;
+    border: 3px solid var(--pale);
+  }
+  .face img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin-top: .5rem; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .92rem;
+    background: #fff;
+  }
+  th, td {
+    border: 1px solid #ebdcc4;
+    padding: .55rem .65rem;
+    text-align: left;
+  }
+  th { background: var(--pale); color: var(--deep); font-weight: 700; }
+  td.center { text-align: center; }
+
+  /* Schedule */
+  .schedule-line {
+    font-size: 1.02rem;
+    line-height: 1.85;
+    margin: 0;
+  }
+  .schedule-line b { color: var(--deep); }
+
+  /* Voice tag row */
+  .voice-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+    margin-bottom: .5rem;
+  }
+
+  /* Photos stack */
+  .photo-stack { display: flex; flex-direction: column; gap: .65rem; }
+
+  /* Logo */
+  .logo { height: 48px; margin-bottom: .75rem; }
+
+  /* LINE */
+  .btn-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    width: 100%;
+    padding: 1.05rem 1.25rem;
+    background: var(--line);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 14px;
+    font-size: 1.08rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(6,199,85,.35);
+  }
+  .btn-line svg { width: 1.55rem; height: 1.55rem; fill: #fff; flex: none; }
+  .line-steps { display: flex; flex-direction: column; gap: .65rem; margin: 1rem 0; }
+  .line-step {
+    display: flex; gap: .75rem; align-items: flex-start;
+    background: #fff; border-radius: 12px;
+    padding: .85rem 1rem; border: 1px solid #d4edda;
+    font-size: .98rem; line-height: 1.6;
+  }
+  .step-num {
+    flex: none; width: 1.85rem; height: 1.85rem;
+    background: var(--line); color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .88rem;
+  }
+
+  /* Next button (fixed) */
+  .nav-next {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 150;
+    padding: .65rem 1rem calc(.65rem + var(--safe-bottom));
+    background: linear-gradient(to top, rgba(253,248,240,.98) 70%, transparent);
+    pointer-events: none;
+  }
+  .nav-next button {
+    pointer-events: auto;
+    width: 100%;
+    appearance: none;
+    border: none;
+    background: var(--main);
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.12rem;
+    font-weight: 700;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(224,138,60,.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+  }
+  .nav-next button:active { transform: scale(.98); background: var(--deep); }
+  .nav-next button .arrow { font-size: 1.25rem; line-height: 1; }
+
+  .nav-next.hidden { display: none; }
+
+  .tap-hint {
+    position: absolute;
+    bottom: 5.5rem; left: 0; right: 0;
+    text-align: center;
+    font-size: .72rem;
+    color: rgba(255,255,255,.65);
+    letter-spacing: .1em;
+    pointer-events: none;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: .5; }
+    50% { opacity: 1; }
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(46,42,42,.88) 0%, rgba(46,42,42,.35) 50%, rgba(46,42,42,.15) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem 1.25rem 5.5rem;
+  }
+
+  .info-block { font-size: .95rem; line-height: 1.75; }
+  .info-block .clinic-name { font-weight: 700; font-size: 1.02rem; margin-bottom: .35rem; }
+  .muted { color: #8a8080; font-size: .82rem; }
+
+  .qr-box {
+    background: #fff;
+    border: 2px solid var(--main);
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .qr-box img { width: 88px; height: 88px; object-fit: contain; flex: none; }
+</style>
+</head>
+<body>
+
+<script>
+  const LINE_ADD_URL = "https://lin.ee/1LDLUHq"; // assets/qr-line.png と同一の友だち追加URL
+  const TOTAL = 0; // set by JS
+</script>
+
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-label" id="progress-label">1 / —</div>
+</div>
+
+<div id="deck">
+
+<!-- ═══ P1 表紙 ═══ -->
+<section class="slide dark-slide" data-title="表紙">
+  <div class="slide-photo hero-img" style="height:100%;position:absolute;inset:0;">
+    <img src="assets/hero-staff.jpg" alt="スタッフ集合写真">
+  </div>
+  <div class="hero-overlay">
+    <p class="catch">外来も、訪問も。<br>あなたの歯科衛生士人生に、<br>二つの景色を。</p>
+    <p class="tap-hint">タップで次へ →</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body center compact">
+    <p class="catch-sub">歯科衛生士の皆さまへ</p>
+    <p class="lead" style="text-align:center;">予防を深める。専門診療に触れる。<br>地域で暮らす人の「食べる」を支える。<br>ここには、自分に合う歯科衛生士の道があります。</p>
+    <img class="logo" src="assets/logo.png" alt="おきとう歯科">
+    <p style="font-weight:700;font-size:1.05rem;color:var(--dark);margin:0;">医療法人社団碧雄会<br>おきとう歯科クリニック</p>
+    <p class="en" style="margin-top:.5rem;">DENTAL HYGIENIST RECRUIT GUIDE</p>
+    <p class="muted" style="margin-top:1rem;">広島県福山市神辺町</p>
+  </div>
+</section>
+
+<!-- ═══ P2 CONCEPT ═══ -->
+<section class="slide">
+  <div class="band">
+    <span class="band-label">CONCEPT</span>
+    <p class="band-title">地域で暮らす人の、<br>お口と人生を支える。</p>
+  </div>
+  <div class="slide-photo shot">
+    <img src="assets/exterior-dusk.jpg" alt="医院外観">
+    <div class="cap">本院外観（福山市神辺町）</div>
+  </div>
+  <div class="slide-body compact">
+    <p class="lead">おきとう歯科クリニックは、福山市神辺町で25年以上、外来診療と訪問歯科診療の両方に取り組んできました。</p>
+    <p class="lead">クリニックに通う患者さんの予防を支えること。通院が難しくなった方のもとへ出向き、口腔ケアや「食べる」を支えること。</p>
+    <p class="lead">場所が変わっても、歯科衛生士の仕事の中心にあるのは、<span class="tagline">患者さんの生活を守ること</span>です。</p>
+    <p class="lead">一人ひとりが自分に合った役割を見つけ、無理なく成長できる医院を目指しています。</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body">
+    <h2 class="slide-h">私たちが大切にする<br>3つの考え方</h2>
+    <div class="values">
+      <div class="value-card"><span class="chip">1</span> 患者さんの今だけでなく、その先の生活まで考える</div>
+      <div class="value-card"><span class="chip g">2</span> 一人で抱えず、チームで支える</div>
+      <div class="value-card"><span class="chip o">3</span> 自分に合った働き方と専門性を育てる</div>
+    </div>
+    <div class="note">外来と訪問の二本柱。予防メンテナンスは月約1,000名、訪問診療は最大10チーム体制。</div>
+  </div>
+</section>
+
+<!-- ═══ P3 GREETING ═══ -->
+<section class="slide">
+  <div class="band">
+    <span class="band-label">GREETING</span>
+    <p class="band-title">ようこそ、<br>おきとう歯科クリニックへ</p>
+  </div>
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="person">
+        <div class="face"><img src="assets/director.jpg" alt="院長"></div>
+        <div>
+          <div class="card-name">理事長・院長　沖藤 泰隆</div>
+          <div class="card-role">法人としての歓迎メッセージ</div>
+        </div>
+      </div>
+      <p class="card-text">おきとう歯科クリニックでは、外来診療と訪問歯科診療を通じて、地域の皆さまのお口の健康を支えています。歯科衛生士が安心して働き、それぞれの得意分野を育てていける環境を整えることが、よりよい医療につながると考えています。まずは医院の雰囲気や、実際に働くスタッフの姿を見に来てください。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="person">
+        <div class="face"><img src="assets/nakaya.jpg" alt="中谷先生" style="object-fit:cover;object-position:38% 12%;"></div>
+        <div>
+          <div class="card-name">歯科医師　中谷 輝一郎</div>
+          <div class="card-role">臨床・教育環境について</div>
+        </div>
+      </div>
+      <p class="card-text">最初から、自分の進みたい道が決まっていなくても問題ありません。予防、インビザライン、インプラント、訪問口腔ケア、摂食嚥下。実際の診療を経験しながら、自分に合う分野を見つけられるのがおきとう歯科の特徴です。分からないまま一人にせず、先輩と一緒に確認しながら、できることを一つずつ増やしていきます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body compact">
+    <h2 class="slide-h">数字で見る<br>おきとう歯科</h2>
+    <div class="stats">
+      <div class="stat"><b>2001</b>開院<br>（25年以上）</div>
+      <div class="stat"><b>71</b>スタッフ<br>総数</div>
+      <div class="stat"><b>23</b>歯科<br>医師</div>
+      <div class="stat"><b>27</b>歯科<br>衛生士</div>
+      <div class="stat"><b>10</b>訪問<br>チーム</div>
+      <div class="stat"><b>1,000</b>予防メンテ<br>/月</div>
+      <div class="stat"><b>120+</b>年間<br>休日</div>
+      <div class="stat"><b>2</b>賞与<br>/年</div>
+      <div class="stat"><b>日祝</b>休診</div>
+    </div>
+    <p class="stat-note">※スタッフ数は2026年6月時点の確定値。</p>
+  </div>
+  <div class="slide-photo shot-sm">
+    <img src="assets/aligner.jpg" alt="マウスピース型矯正">
+    <div class="cap">マウスピース型矯正装置（インビザライン）</div>
+  </div>
+</section>
+
+<!-- ═══ P4 WORKS ═══ -->
+<section class="slide">
+  <div class="band">
+    <span class="band-label">WORKS</span>
+    <p class="band-title">一つの医院で、<br>こんなに多くの経験ができます。</p>
+  </div>
+  <div class="slide-body compact">
+    <h3 class="slide-h3 out">外来で経験できること</h3>
+    <ul class="big-list">
+      <li>30分枠の予防メンテナンス</li>
+      <li>スケーリング・歯周基本治療・口腔衛生指導</li>
+      <li>インプラント診療のアシスト</li>
+      <li>インビザラインとiTeroスキャン</li>
+      <li>プレオルソなどの小児矯正</li>
+      <li>自費CR・審美補綴</li>
+      <li>サージカムHD映像での診療の振り返り</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-photo shot">
+    <img src="assets/reception.jpg" alt="受付">
+    <div class="cap">受付・カウンセリング（パーテーションで半個室に）</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-photo shot">
+    <img src="assets/itero.jpg" alt="iTero">
+    <div class="cap">口腔内スキャナー iTero element</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body compact">
+    <h3 class="slide-h3 visit">訪問で経験できること</h3>
+    <ul class="big-list">
+      <li>高齢者・通院困難な方への口腔ケア</li>
+      <li>歯科衛生指導・診療補助</li>
+      <li>摂食嚥下・口腔リハビリ</li>
+      <li>施設・ご家族・ケアマネとの多職種連携</li>
+      <li>Dr・DH・COによるチーム診療</li>
+      <li>タブレットを使った記録</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-photo shot">
+    <img src="assets/aligner.jpg" alt="マウスピース型矯正">
+    <div class="cap">インビザライン（マウスピース型矯正）</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-photo shot map">
+    <img src="assets/visit-map.jpeg" alt="訪問エリア">
+    <div class="cap">訪問診療エリア（福山とその周辺・5エリア）</div>
+  </div>
+  <div class="slide-body compact" style="padding-top:.75rem;padding-bottom:5.5rem;">
+    <div class="note" style="margin-top:0;">一般診療から予防・インプラント・インビザライン・自費診療・訪問診療まで、幅広い経験ができることが当院の強みです。</div>
+  </div>
+</section>
+
+<!-- ═══ P5 BENEFITS ═══ -->
+<section class="slide">
+  <div class="band">
+    <span class="band-label">BENEFITS</span>
+    <p class="band-title">働き続けられることも、<br>大切な成長です。</p>
+  </div>
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="card-name">休暇・時間</div>
+      <ul class="big-list" style="margin-top:.65rem;">
+        <li>週休2日制／日曜・祝日休診</li>
+        <li>年間休日120日以上</li>
+        <li>入社半年後に有給休暇10日付与</li>
+        <li>半日単位での有給取得OK</li>
+        <li>産前産後・育児・介護休業制度</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-name">待遇・評価</div>
+      <ul class="big-list" style="margin-top:.65rem;">
+        <li>社会保険完備／通勤手当／制服貸与</li>
+        <li>賞与 年2回</li>
+        <li>年1回の昇給・人事評価</li>
+        <li>退職金制度・ベースアップ制度</li>
+        <li>外来DHの報奨金制度</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="card-name">学び</div>
+      <ul class="big-list" style="margin-top:.65rem;">
+        <li>院外研修費用の補助</li>
+        <li>嚥下・口腔リハビリ等の講習会参加実績</li>
+        <li>健康診断</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-name">チーム</div>
+      <ul class="big-list" style="margin-top:.65rem;">
+        <li>約70名規模だから、休暇と相談体制を確保できる</li>
+        <li>Notion・LINE WORKSでの情報共有</li>
+        <li>訪問はDr・DH・COの3職種で動くチーム制</li>
+      </ul>
+    </div>
+    <div class="note">給与・退職金の勤続条件・研修補助率・報奨金の最新条件は、面談時に最新の雇用条件をご確認ください。</div>
+  </div>
+  <div class="slide-photo shot-sm">
+    <img src="assets/exterior-sign.jpg" alt="本院前">
+    <div class="cap">エントランス・本院前</div>
+  </div>
+</section>
+
+<!-- ═══ P6 EDUCATION ═══ -->
+<section class="slide">
+  <div class="band">
+    <span class="band-label">EDUCATION</span>
+    <p class="band-title">「見て覚えて」ではなく、<br>一緒に確認しながら身につける。</p>
+  </div>
+  <div class="slide-body compact">
+    <p class="lead">入社後は、先輩DHが一人ひとりの成長に伴走します。最初に「私はこんな歯科衛生士になります」という目標を設定。教育計画、毎日のTo Do、日誌、自己評価を一つにつなげ、今できていることと次に学ぶことを確認します。</p>
+    <p class="lead">手順だけでなく<span class="tagline">「なぜそうするのか」</span>まで共有し、自分で考えて動ける歯科衛生士を育てます。</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>時期</th><th>内容</th></tr>
+        <tr><td>入社初日</td><td>オリエンテーション</td></tr>
+        <tr><td>1週目</td><td>先輩の診療見学とアシスト</td></tr>
+        <tr><td>1〜3か月</td><td>マンツーマン指導</td></tr>
+        <tr><td>毎日</td><td>日誌とフィードバック</td></tr>
+        <tr><td>定期</td><td>自己評価と習得状況の確認</td></tr>
+        <tr><td>独り立ち後</td><td>予防・矯正・インプラント・訪問などへ展開</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-photo shot">
+    <img src="assets/education-desk.jpg" alt="診療見学">
+    <div class="cap">先輩の診療を間近で。見学・アシストから始まります</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-photo shot">
+    <img src="assets/aligner.jpg" alt="実習風景">
+    <div class="cap">専門診療の道具も、先輩と一つずつ確認</div>
+  </div>
+  <div class="slide-body compact" style="padding-top:.75rem;">
+    <div class="note" style="margin-top:0;">教育用DB・Training Plan・日誌・To Do・自己評価シートを用いた「計画×実践×フィードバック」の仕組みが、すでに運用されています。</div>
+  </div>
+</section>
+
+<!-- ═══ P7 SCHEDULE & VOICE ═══ -->
+<section class="slide">
+  <div class="band">
+    <span class="band-label">SCHEDULE</span>
+    <p class="band-title">1日の流れ</p>
+  </div>
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="card-name">外来DHの1日</div>
+      <p class="schedule-line" style="margin-top:.65rem;">出勤・診療準備 → <b>9:00</b> 午前診療 → <b>12:30</b> 昼休憩 → <b>14:30</b> 午後診療 → <b>18:30</b> 診療終了・片付け・退勤</p>
+    </div>
+    <div class="card">
+      <div class="card-name" style="color:#4a8aad;">訪問DHの1日</div>
+      <p class="schedule-line" style="margin-top:.65rem;"><b>9:00</b> 準備・ルート共有 → <b>9:10</b> チームで出発 → 午前訪問 → 昼休憩 → 午後訪問 → 帰院後、記録・翌日準備</p>
+    </div>
+    <div class="note">土曜の午後は外来14:00開始（訪問診療は14:30開始）。訪問はDr・DH・COの3職種で動くため、運転やスケジュール管理を一人で抱えません。</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="band">
+    <span class="band-label">VOICE</span>
+    <p class="band-title">先輩の声</p>
+  </div>
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="voice-head">
+        <span class="card-name">秀平 亜弥</span>
+        <span class="chip p">2024年10月入社・外来</span>
+      </div>
+      <p class="card-text">見学のとき、先輩が患者さんにも私にも丁寧に接してくれたのが決め手でした。教育担当の先輩がついてくれるので、経験が浅くても安心して飛び込めました。一人でできることが少しずつ増えていく毎日です。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="voice-head">
+        <span class="card-name">藤井 綾音</span>
+        <span class="chip o">2017年入社・インビザライン担当</span>
+      </div>
+      <p class="card-text">スキャンから経過フォローまで任せてもらえるのがやりがいです。新しい取り組みに手を挙げると任せてくれる医院なので、やりたいことがある人には面白い環境。頑張りをきちんと評価してもらえます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="voice-head">
+        <span class="card-name">三島 美玲</span>
+        <span class="chip">2016年入社・訪問専任</span>
+      </div>
+      <p class="card-text">訪問では衛生士が口腔ケアの主役です。講習会にも参加しながら「食べること」を支えるケアを追求しています。患者さんやご家族から感謝される瞬間が一番のやりがいです。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body compact">
+    <div class="card">
+      <div class="voice-head">
+        <span class="card-name">岩佐 侑加</span>
+        <span class="chip g">2026年4月入社・中途</span>
+      </div>
+      <p class="card-text">40代での転職でしたが、入社後1ヶ月は先輩と同行できる体制と聞いて決めました。無理のないペースで独り立ちでき、残業もほとんどなく毎日きちんと業務を終えられています。</p>
+    </div>
+  </div>
+  <div class="slide-photo shot-sm">
+    <img src="assets/staff-team.jpg" alt="スタッフ">
+    <div class="cap">先輩たちが、あなたを待っています</div>
+  </div>
+</section>
+
+<!-- ═══ P8 裏表紙 ═══ -->
+<section class="slide">
+  <div class="slide-body compact">
+    <p class="en">TO FUTURE DENTAL HYGIENISTS</p>
+    <h2 class="slide-h">未来の歯科衛生士さんへ</h2>
+    <p class="lead">歯科衛生士の道は、一つではありません。予防を極める道。矯正やインプラントに関わる道。訪問診療で、人生の最期まで「食べる」を支える道。後輩を育て、チームを支える道。</p>
+    <p class="lead">おきとう歯科クリニックには、実際に働きながら、自分の道を見つけられる環境があります。まずは見学で、医院の空気と働くスタッフの姿を確かめてください。</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-photo shot">
+    <img src="assets/staff-team.jpg" alt="スタッフ集合写真">
+    <div class="cap">スタッフ一同、お待ちしています</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-photo shot">
+    <img src="assets/exterior-sign.jpg" alt="夕暮れの医院前">
+    <div class="cap">夕暮れの本院前</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-body compact">
+    <img class="logo" src="assets/logo.png" alt="ロゴ">
+    <div class="info-block">
+      <div class="clinic-name">医療法人社団碧雄会 おきとう歯科クリニック</div>
+      〒720-2125 広島県福山市神辺町大字新徳田3-495<br>
+      TEL 084-962-5511
+      <p class="muted" style="margin-top:.65rem;">診療科目：一般歯科／予防歯科／審美歯科／インプラント／インビザライン／訪問診療／小児歯科</p>
+    </div>
+    <div class="table-wrap" style="margin-top:1rem;">
+      <table>
+        <tr><th></th><th>月〜金</th><th>土</th><th>日祝</th></tr>
+        <tr><td>9:00〜12:30</td><td class="center">●</td><td class="center">●</td><td class="center">—</td></tr>
+        <tr><td>午後</td><td class="center">14:30〜18:30</td><td class="center">14:00〜18:30</td><td class="center">—</td></tr>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:.5rem;">※土曜午後は外来14:00開始（訪問診療は14:30開始）</p>
+  </div>
+</section>
+
+<!-- ═══ LINE CTA（最終） ═══ -->
+<section class="slide" id="slide-line">
+  <div class="band" style="background:var(--line);">
+    <span class="band-label">VISIT</span>
+    <p class="band-title">見学のお申し込みは<br>公式LINEで</p>
+  </div>
+  <div class="slide-body compact">
+    <div class="line-steps">
+      <div class="line-step">
+        <span class="step-num">1</span>
+        <div>下のボタンで友だち追加<br><span class="muted">LINEアプリが開きます</span></div>
+      </div>
+      <div class="line-step">
+        <span class="step-num">2</span>
+        <div>「見学希望」と送る<br><span class="muted">候補日が2つあるとスムーズです</span></div>
+      </div>
+      <div class="line-step">
+        <span class="step-num">3</span>
+        <div>返信を待つ<br><span class="muted">続きは、あなたのペースで</span></div>
+      </div>
+    </div>
+
+    <a class="btn-line" id="line-cta" href="#">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      公式LINEで見学を相談する
+    </a>
+
+    <div class="qr-box">
+      <img src="assets/qr-line.png" alt="LINE QR" onerror="this.style.display='none'">
+      <div style="font-size:.95rem;line-height:1.65;">
+        <div style="font-weight:700;color:var(--deep);font-size:1.05rem;">友だち追加して「見学希望」</div>
+        日程のご相談だけでも大歓迎です。
+      </div>
+    </div>
+
+    <p class="muted" style="text-align:center;margin-top:1.25rem;">OKITO DENTAL CLINIC<br>医療法人社団碧雄会</p>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<div class="nav-next" id="nav-next">
+  <button type="button" id="btn-next" aria-label="次の画面へ">
+    次へ <span class="arrow">→</span>
+  </button>
+</div>
+
+<script>
+(function () {
+  var deck = document.getElementById("deck");
+  var slides = Array.from(deck.querySelectorAll(".slide"));
+  var total = slides.length;
+  var current = 0;
+  var fill = document.getElementById("progress-fill");
+  var label = document.getElementById("progress-label");
+  var btnNext = document.getElementById("btn-next");
+  var navNext = document.getElementById("nav-next");
+  var lineCta = document.getElementById("line-cta");
+
+  lineCta.href = LINE_ADD_URL;
+
+  function updateUI() {
+    var pct = ((current + 1) / total) * 100;
+    fill.style.width = pct + "%";
+    label.textContent = (current + 1) + " / " + total;
+    if (current >= total - 1) {
+      navNext.classList.add("hidden");
+    } else {
+      navNext.classList.remove("hidden");
+      btnNext.innerHTML = current === total - 2
+        ? '見学の申し込みへ <span class="arrow">→</span>'
+        : '次へ <span class="arrow">→</span>';
+    }
+  }
+
+  function goTo(index) {
+    if (index < 0 || index >= total) return;
+    current = index;
+    slides[current].scrollIntoView({ behavior: "smooth", block: "start" });
+    updateUI();
+  }
+
+  function next() {
+    if (current < total - 1) goTo(current + 1);
+  }
+
+  btnNext.addEventListener("click", function (e) {
+    e.stopPropagation();
+    next();
+  });
+
+  deck.addEventListener("click", function (e) {
+    if (e.target.closest("a, button, table")) return;
+    var body = e.target.closest(".slide-body");
+    if (body && body.scrollHeight > body.clientHeight + 12) return;
+    if (current < total - 1) next();
+  });
+
+  var touchStartY = 0;
+  deck.addEventListener("touchstart", function (e) {
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  deck.addEventListener("touchend", function (e) {
+    var dy = touchStartY - e.changedTouches[0].screenY;
+    if (dy > 60 && current < total - 1) next();
+    if (dy < -60 && current > 0) goTo(current - 1);
+  }, { passive: true });
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.55) {
+        var idx = slides.indexOf(entry.target);
+        if (idx !== -1) {
+          current = idx;
+          updateUI();
+        }
+      }
+    });
+  }, { root: deck, threshold: [0.55] });
+
+  slides.forEach(function (s) { observer.observe(s); });
+  updateUI();
+})();
+</script>
+</body>
+</html>
