@@ -33,7 +33,7 @@
     background: var(--dark);
     color: var(--text);
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+    touch-action: none;
   }
 
   /* ── Progress ── */
@@ -59,19 +59,24 @@
   /* ── Slides ── */
   #deck {
     height: 100dvh;
+    overflow-x: hidden;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+    -webkit-scroll-snap-type: y mandatory;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
   }
   .slide {
     min-height: 100dvh;
+    height: 100dvh;
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
     display: flex;
     flex-direction: column;
     background: var(--ivory);
     position: relative;
+    overflow: hidden;
   }
   .slide.dark-slide { background: var(--dark); color: #fff; }
 
@@ -123,9 +128,12 @@
   /* Content */
   .slide-body {
     flex: 1;
+    min-height: 0;
     padding: 1.15rem 1.25rem 5.5rem;
     overflow-y: auto;
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
   .slide-body.center { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .slide-body.compact { padding-top: .85rem; }
@@ -898,8 +906,24 @@
   var btnNext = document.getElementById("btn-next");
   var navNext = document.getElementById("nav-next");
   var lineCta = document.getElementById("line-cta");
+  var scrollTimer = null;
+  var isProgrammatic = false;
 
   lineCta.href = LINE_ADD_URL;
+
+  function nearestSlideIndex() {
+    var deckTop = deck.getBoundingClientRect().top;
+    var best = 0;
+    var bestDist = Infinity;
+    slides.forEach(function (slide, index) {
+      var dist = Math.abs(slide.getBoundingClientRect().top - deckTop);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = index;
+      }
+    });
+    return best;
+  }
 
   function updateUI() {
     var pct = ((current + 1) / total) * 100;
@@ -915,15 +939,28 @@
     }
   }
 
-  function goTo(index) {
+  function syncCurrentFromScroll() {
+    var idx = nearestSlideIndex();
+    if (idx !== current) {
+      current = idx;
+      updateUI();
+    }
+  }
+
+  function goTo(index, smooth) {
     if (index < 0 || index >= total) return;
     current = index;
-    slides[current].scrollIntoView({ behavior: "smooth", block: "start" });
+    isProgrammatic = true;
+    slides[current].scrollIntoView({
+      behavior: smooth ? "smooth" : "auto",
+      block: "start"
+    });
     updateUI();
+    setTimeout(function () { isProgrammatic = false; }, smooth ? 450 : 50);
   }
 
   function next() {
-    if (current < total - 1) goTo(current + 1);
+    if (current < total - 1) goTo(current + 1, true);
   }
 
   btnNext.addEventListener("click", function (e) {
@@ -938,20 +975,24 @@
     if (current < total - 1) next();
   });
 
-  var touchStartY = 0;
-  deck.addEventListener("touchstart", function (e) {
-    touchStartY = e.changedTouches[0].screenY;
+  function onScrollEnd() {
+    syncCurrentFromScroll();
+  }
+
+  deck.addEventListener("scroll", function () {
+    if (isProgrammatic) return;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(onScrollEnd, 100);
   }, { passive: true });
 
-  deck.addEventListener("touchend", function (e) {
-    var dy = touchStartY - e.changedTouches[0].screenY;
-    if (dy > 60 && current < total - 1) next();
-    if (dy < -60 && current > 0) goTo(current - 1);
-  }, { passive: true });
+  if ("onscrollend" in deck) {
+    deck.addEventListener("scrollend", onScrollEnd, { passive: true });
+  }
 
   var observer = new IntersectionObserver(function (entries) {
+    if (isProgrammatic) return;
     entries.forEach(function (entry) {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.55) {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
         var idx = slides.indexOf(entry.target);
         if (idx !== -1) {
           current = idx;
@@ -959,7 +1000,7 @@
         }
       }
     });
-  }, { root: deck, threshold: [0.55] });
+  }, { root: deck, threshold: [0.6] });
 
   slides.forEach(function (s) { observer.observe(s); });
   updateUI();
