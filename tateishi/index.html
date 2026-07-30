@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>立石さん・初月のお仕事</title>
+  <style>
+    :root {
+      --bg: #faf6ef;
+      --bg-card: #fffdf8;
+      --text: #4a3728;
+      --text-muted: #6b5344;
+      --accent: #a67c52;
+      --accent-soft: #e8d5c4;
+      --line: #d4c4b0;
+      --do: #5a7a52;
+      --do-bg: #eef5eb;
+      --dont: #8b5a52;
+      --dont-bg: #f8eeec;
+      --heat: #9a6b3d;
+      --heat-bg: #fdf0e3;
+      --heat-border: #e8c9a8;
+      --timeline: #c9a882;
+      --fs-body: 18px;
+      --fs-head: 22px;
+      --fs-hero: 26px;
+      --radius: 14px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: var(--fs-body);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding: 0 0 calc(24px + var(--safe-bottom));
+    }
+
+    .wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px 16px 0;
+    }
+
+    .header {
+      text-align: center;
+      padding: 8px 0 20px;
+    }
+
+    .clinic-name {
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .header h1 {
+      font-size: var(--fs-hero);
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .header .sub {
+      margin-top: 10px;
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    .hero {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(74, 55, 40, 0.06);
+    }
+
+    .hero-label {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hero-list { list-style: none; }
+
+    .hero-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--line);
+      font-size: var(--fs-body);
+    }
+
+    .hero-list li:last-child { border-bottom: none; }
+
+    .hero-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .hero-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: var(--do-bg);
+      border-radius: 10px;
+      font-size: 16px;
+      color: var(--do);
+      line-height: 1.5;
+    }
+
+    .sec-title {
+      font-size: var(--fs-head);
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: 28px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--timeline), var(--accent-soft));
+      border-radius: 2px;
+    }
+
+    .step { position: relative; margin-bottom: 20px; }
+    .step:last-child { margin-bottom: 0; }
+
+    .step-dot {
+      position: absolute;
+      left: -36px;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      background: var(--bg-card);
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px 12px;
+      box-shadow: 0 1px 4px rgba(74, 55, 40, 0.05);
+    }
+
+    .step-time {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step-body {
+      font-size: 17px;
+      color: var(--text-muted);
+    }
+
+    .step-body ul { margin-top: 6px; padding-left: 1.2em; }
+    .step-body li { margin: 4px 0; }
+
+    .schedule { margin-bottom: 28px; }
+
+    .schedule-note {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .day-row {
+      display: flex;
+      align-items: stretch;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .day-label {
+      flex-shrink: 0;
+      width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .day-info {
+      flex: 1;
+      padding: 10px 12px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .day-info strong { font-size: 17px; color: var(--text); }
+    .day-info .car { color: var(--text-muted); font-size: 15px; }
+
+    .day-row.highlight { border-color: var(--accent); border-width: 2px; }
+    .day-row.highlight .day-label { background: var(--accent); color: #fff; }
+
+    .day-badge {
+      display: inline-block;
+      font-size: 13px;
+      background: var(--do-bg);
+      color: var(--do);
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-top: 4px;
+    }
+
+    .panels { display: grid; gap: 12px; margin-bottom: 28px; }
+    .panel { border-radius: var(--radius); padding: 14px; }
+    .panel-dont { background: var(--dont-bg); border: 1px solid #dcc5c0; }
+    .panel h3 { font-size: 17px; margin-bottom: 8px; }
+    .panel-dont h3 { color: var(--dont); }
+    .panel ul { padding-left: 1.2em; font-size: 16px; }
+    .panel li { margin: 4px 0; }
+
+    .ask-flow {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .ask-flow p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .ask-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      font-size: 16px;
+    }
+
+    .ask-step {
+      background: var(--accent-soft);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .ask-arrow { color: var(--accent); font-weight: 700; }
+
+    .ask-note {
+      margin-top: 10px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .contact { margin-bottom: 28px; }
+
+    .tips {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 28px;
+    }
+
+    .tips h3 { font-size: 17px; margin-bottom: 8px; }
+
+    .tips p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin: 6px 0;
+    }
+
+    .tips ul {
+      padding-left: 1.2em;
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .tips li { margin: 4px 0; }
+
+    .heat {
+      background: var(--heat-bg);
+      border: 1px solid var(--heat-border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 28px;
+    }
+
+    .heat h3 { font-size: 17px; color: var(--heat); margin-bottom: 8px; }
+
+    .heat p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin: 6px 0;
+    }
+
+    .lunch-options { display: grid; gap: 8px; margin-top: 10px; }
+
+    .lunch-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    .lunch-letter { flex-shrink: 0; font-weight: 700; color: var(--accent); }
+
+    .note-card {
+      background: var(--bg-card);
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 16px 0 8px;
+      border-top: 1px solid var(--line);
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .footer .from { margin-top: 8px; color: var(--text); font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="header">
+      <p class="clinic-name">おきとう歯科クリニック</p>
+      <h1>立石さん<br>初月のお仕事</h1>
+      <p class="sub">8月から。覚えることは3つだけです。</p>
+    </header>
+
+    <section class="hero" aria-label="お仕事の内容">
+      <p class="hero-label">最初の1ヶ月のお仕事</p>
+      <ul class="hero-list">
+        <li>
+          <span class="hero-num">1</span>
+          <span>車を運転する</span>
+        </li>
+        <li>
+          <span class="hero-num">2</span>
+          <span>カルテや道具箱を運ぶ<br><small style="color:var(--text-muted)">（積む・降ろす）</small></span>
+        </li>
+        <li>
+          <span class="hero-num">3</span>
+          <span>先生・衛生士さんの手元を手伝う<br><small style="color:var(--text-muted)">（案内、トレーを持つ、など）</small></span>
+        </li>
+      </ul>
+      <p class="hero-note">医療の経験がなくて大丈夫です。<br>「CO」と書いてあっても、最初はこの3つだけ。</p>
+    </section>
+
+    <h2 class="sec-title">1日の流れ</h2>
+    <div class="timeline" aria-label="1日の流れ">
+
+      <div class="step">
+        <span class="step-dot" aria-hidden="true"></span>
+        <div class="step-card">
+          <p class="step-time">朝</p>
+          <p class="step-title">事務所から出発</p>
+          <div class="step-body">
+            <ul>
+              <li>事務所に来る</li>
+              <li>その日の車に荷物を積む</li>
+              <li>先生・衛生士と一緒に出発</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-dot" aria-hidden="true"></span>
+        <div class="step-card">
+          <p class="step-time">昼</p>
+          <p class="step-title">施設を回る</p>
+          <div class="step-body">
+            <ul>
+              <li>運転する</li>
+              <li>荷物を運ぶ</li>
+              <li>先生・衛生士の手伝い</li>
+            </ul>
+            <p style="margin-top:8px;">お昼はエリアごとに休憩場所が違います（下の「昼食について」参照）。</p>
+            <p style="margin-top:8px;">わからないことは、その場で聞いてください。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-dot" aria-hidden="true"></span>
+        <div class="step-card">
+          <p class="step-time">帰り</p>
+          <p class="step-title">事務所で終了</p>
+          <div class="step-body">
+            <ul>
+              <li>事務所に戻る</li>
+              <li>荷物を降ろす</li>
+              <li>お疲れさまでした</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <section class="schedule" aria-label="8月の出勤">
+      <h2 class="sec-title">8月の出勤</h2>
+      <p class="schedule-note">土曜・日曜は休みです。</p>
+
+      <div class="day-row">
+        <div class="day-label">月</div>
+        <div class="day-info">
+          <strong>4号</strong>（福原先生）<br>
+          <span class="car">車：ピクシス</span>
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">火</div>
+        <div class="day-info">
+          <strong>2号</strong>（佐藤先生）<br>
+          <span class="car">車：ピクシス</span>
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">水</div>
+        <div class="day-info">
+          <strong>6号</strong>（信家先生）<br>
+          <span class="car">車：ピクシス</span>
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">木</div>
+        <div class="day-info">
+          <strong>4号</strong>（杉浦先生）<br>
+          <span class="car">車：ピクシス</span>
+        </div>
+      </div>
+
+      <div class="day-row highlight">
+        <div class="day-label">金</div>
+        <div class="day-info">
+          <strong>3号</strong>（瀧先生）<br>
+          <span class="car">車：シャトル</span>
+          <span class="day-badge">森元さんと一緒</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="heat" aria-label="猛暑・車内について">
+      <h3>猛暑の時期の準備</h3>
+      <p>8月は非常に暑く続いています。冷感対策・熱中症対策の準備をお願いします。</p>
+      <p>例：帽子、日焼け止め、こまめな水分補給、冷却タオル、こまめな休憩 など</p>
+      <p style="margin-top:10px;">移動で使う軽バン（Kバン）は、車内の広さや乗車人数、移動距離が短いことなどから、なかなかクーラーが効きづらいことがあります。あらかじめご了承ください。</p>
+    </section>
+
+    <section class="tips" aria-label="昼食について">
+      <h3>昼食について</h3>
+      <p>エリアごとに休憩場所が違うため、スタッフはそれぞれ次のように過ごしています。</p>
+      <div class="lunch-options">
+        <div class="lunch-opt">
+          <span class="lunch-letter">a</span>
+          <span>お弁当を持参する</span>
+        </div>
+        <div class="lunch-opt">
+          <span class="lunch-letter">b</span>
+          <span>現地で外食する、またはお弁当を購入して食べる</span>
+        </div>
+      </div>
+      <p style="margin-top:10px;">どちらでも大丈夫です。その日の現場に合わせて選んでください。</p>
+    </section>
+
+    <div class="panels">
+      <div class="panel panel-dont">
+        <h3>まだお願いしないこと</h3>
+        <ul>
+          <li>予約の組み立て</li>
+          <li>パソコン入力</li>
+          <li>お金・書類・保険証</li>
+          <li>料金の説明</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="ask-flow" aria-label="困ったとき">
+      <p>わからないときは、まず現場のスタッフに聞いてください</p>
+      <p class="ask-note" style="margin-bottom:10px;">どこに電話すればいいかなど、ほとんどのことは現場で教えてもらえます。お気軽にどうぞ。</p>
+      <p style="font-size:15px;color:var(--text-muted);margin-bottom:10px;">それでも迷ったときの目安</p>
+      <div class="ask-steps">
+        <span class="ask-step">先生・衛生士</span>
+        <span class="ask-arrow">→</span>
+        <span class="ask-step">森元さん</span>
+        <span class="ask-arrow">→</span>
+        <span class="ask-step">浅野さん</span>
+      </div>
+      <p class="ask-note">質問は1日3つくらいで十分です</p>
+    </section>
+
+    <section class="contact" aria-label="持ち物">
+      <h2 class="sec-title">持ち物</h2>
+
+      <div class="tips" style="margin-bottom:12px;">
+        <h3>毎日持参</h3>
+        <ul>
+          <li>普通自動車免許</li>
+          <li>猛暑対策（帽子・水分・冷却グッズなど）</li>
+          <li>昼食（持参する場合）または昼食代</li>
+        </ul>
+      </div>
+
+      <div class="note-card">
+        <strong style="color:var(--text);">訪問用携帯</strong><br>
+        番号の事前共有はしません。出勤日に事務所で直接お渡しします。
+      </div>
+    </section>
+
+    <section class="tips" aria-label="番号について">
+      <h3>「4号」「2号」について</h3>
+      <p>その日のチーム名です。</p>
+      <p>表の①②などの数字や、携帯に貼ってある番号とは別物なので、結びつけなくて大丈夫です。</p>
+    </section>
+
+    <section class="tips" aria-label="初日について">
+      <h3>全部覚えなくて大丈夫</h3>
+      <p>金曜は森元さんが横について教えます。</p>
+      <p>それ以外の日も、現場の先生・衛生士が声をかけます。</p>
+      <p>迷ったら「今日は運転と荷物と手伝いだけ」と思ってください。</p>
+    </section>
+
+    <footer class="footer">
+      <p>ご不明点はLINEでお問い合わせください</p>
+      <p class="from">おきとう歯科クリニック　中谷</p>
+    </footer>
+
+  </div>
+</body>
+</html>
