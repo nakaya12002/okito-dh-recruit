@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="robots" content="noindex, nofollow">
+  <title>立石さん受入｜森元さん向け</title>
+  <style>
+    :root {
+      --bg: #faf6ef;
+      --bg-card: #fffdf8;
+      --text: #4a3728;
+      --text-muted: #6b5344;
+      --accent: #a67c52;
+      --accent-soft: #e8d5c4;
+      --line: #d4c4b0;
+      --do: #5a7a52;
+      --do-bg: #eef5eb;
+      --dont: #8b5a52;
+      --dont-bg: #f8eeec;
+      --timeline: #c9a882;
+      --fs-body: 18px;
+      --fs-head: 22px;
+      --fs-hero: 26px;
+      --radius: 14px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: var(--fs-body); -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding: 0 0 calc(24px + var(--safe-bottom));
+    }
+
+    .wrap { max-width: 480px; margin: 0 auto; padding: 20px 16px 0; }
+
+    .header { text-align: center; padding: 8px 0 20px; }
+
+    .clinic-name {
+      font-size: 14px; color: var(--text-muted);
+      letter-spacing: 0.05em; margin-bottom: 6px;
+    }
+
+    .header h1 {
+      font-size: var(--fs-hero); font-weight: 600;
+      line-height: 1.35; color: var(--text);
+    }
+
+    .header .sub { margin-top: 10px; font-size: 16px; color: var(--text-muted); }
+
+    .hero {
+      background: var(--bg-card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 18px 16px; margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(74, 55, 40, 0.06);
+    }
+
+    .hero-label { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+
+    .hero-note {
+      margin-top: 12px; padding: 10px 12px; background: var(--do-bg);
+      border-radius: 10px; font-size: 16px; color: var(--do); line-height: 1.5;
+    }
+
+    .sec-title {
+      font-size: var(--fs-head); font-weight: 600; margin-bottom: 16px;
+      padding-left: 12px; border-left: 4px solid var(--accent);
+    }
+
+    .timeline { position: relative; padding-left: 36px; margin-bottom: 28px; }
+
+    .timeline::before {
+      content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px;
+      width: 3px; background: linear-gradient(to bottom, var(--timeline), var(--accent-soft));
+      border-radius: 2px;
+    }
+
+    .step { position: relative; margin-bottom: 20px; }
+    .step:last-child { margin-bottom: 0; }
+
+    .step-dot {
+      position: absolute; left: -36px; top: 4px; width: 24px; height: 24px;
+      background: var(--bg-card); border: 3px solid var(--accent); border-radius: 50%; z-index: 1;
+    }
+
+    .step-dot.main { border-color: var(--do); background: var(--do-bg); }
+
+    .step-card {
+      background: var(--bg-card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 14px; box-shadow: 0 1px 4px rgba(74, 55, 40, 0.05);
+    }
+
+    .step-card.main { border-color: var(--do); border-width: 2px; }
+
+    .step-label { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 4px; }
+    .step-card.main .step-label { color: var(--do); }
+
+    .step-title { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+
+    .step-body { font-size: 17px; color: var(--text-muted); }
+    .step-body ul { margin-top: 6px; padding-left: 1.2em; }
+    .step-body li { margin: 4px 0; }
+
+    .roles {
+      background: var(--bg-card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 14px; margin-bottom: 24px;
+    }
+
+    .role-row {
+      display: grid; grid-template-columns: 80px 1fr; gap: 8px;
+      font-size: 16px; padding: 8px 0; border-bottom: 1px dashed var(--line);
+    }
+
+    .role-row:last-child { border-bottom: none; }
+    .role-name { font-weight: 600; color: var(--accent); }
+    .role-desc { color: var(--text-muted); }
+
+    .panels { display: grid; gap: 12px; margin-bottom: 28px; }
+
+    .panel { border-radius: var(--radius); padding: 14px; }
+    .panel-do { background: var(--do-bg); border: 1px solid #c5d9be; }
+    .panel-dont { background: var(--dont-bg); border: 1px solid #dcc5c0; }
+    .panel h3 { font-size: 17px; margin-bottom: 8px; }
+    .panel-do h3 { color: var(--do); }
+    .panel-dont h3 { color: var(--dont); }
+    .panel ul { padding-left: 1.2em; font-size: 16px; }
+    .panel li { margin: 4px 0; }
+
+    .pass {
+      background: var(--bg-card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 14px; margin-bottom: 28px;
+    }
+
+    .pass h3 { font-size: 17px; margin-bottom: 8px; }
+    .pass ul { padding-left: 1.2em; font-size: 16px; color: var(--text-muted); }
+    .pass li { margin: 4px 0; }
+    .pass .note { margin-top: 10px; font-size: 15px; color: var(--text-muted); }
+
+    .schedule { margin-bottom: 28px; }
+
+    .day-row {
+      display: flex; background: var(--bg-card); border: 1px solid var(--line);
+      border-radius: 12px; margin-bottom: 8px; overflow: hidden;
+    }
+
+    .day-label {
+      flex-shrink: 0; width: 44px; display: flex; align-items: center; justify-content: center;
+      background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 17px;
+    }
+
+    .day-info { flex: 1; padding: 10px 12px; font-size: 16px; line-height: 1.45; }
+    .day-info strong { font-size: 17px; }
+    .day-info .sub { color: var(--text-muted); font-size: 15px; }
+
+    .day-row.highlight { border-color: var(--do); border-width: 2px; }
+    .day-row.highlight .day-label { background: var(--do); color: #fff; }
+
+    .day-badge {
+      display: inline-block; font-size: 13px; background: var(--do-bg); color: var(--do);
+      padding: 2px 8px; border-radius: 6px; margin-top: 4px;
+    }
+
+    .tips {
+      background: var(--bg-card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 14px; margin-bottom: 28px;
+    }
+
+    .tips h3 { font-size: 17px; margin-bottom: 8px; }
+    .tips p { font-size: 16px; color: var(--text-muted); margin: 6px 0; }
+
+    .footer {
+      text-align: center; padding: 16px 0 8px; border-top: 1px solid var(--line);
+      color: var(--text-muted); font-size: 15px;
+    }
+
+    .footer .from { margin-top: 8px; color: var(--text); font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="header">
+      <p class="clinic-name">おきとう歯科クリニック</p>
+      <h1>森元さん<br>立石さん受入のお願い</h1>
+      <p class="sub">7/27にお話しした「量のさじ加減」の続きです。</p>
+    </header>
+
+    <section class="hero" aria-label="役割の本質">
+      <p class="hero-label">森元さんの役割</p>
+      <p style="font-size:17px;line-height:1.55;">役割名は「教育担当」ですが、<strong>フルCOの同行研修ではありません。</strong></p>
+      <p style="font-size:17px;margin-top:8px;color:var(--text-muted);">立石さん（医療未経験）向けに、情報量を絞って伴走してください。</p>
+      <p class="hero-note">さじ加減が一番わかっているのは森元さん、という前提でのお願いです。</p>
+    </section>
+
+    <section class="roles" aria-label="役割分担">
+      <div class="role-row">
+        <div class="role-name">森元さん</div>
+        <div class="role-desc">教育・さじ加減（金3同行／座学も可）</div>
+      </div>
+      <div class="role-row">
+        <div class="role-name">浅野さん</div>
+        <div class="role-desc">初日フォロー・現場調整</div>
+      </div>
+      <div class="role-row">
+        <div class="role-name">中谷</div>
+        <div class="role-desc">依頼・方針</div>
+      </div>
+    </section>
+
+    <h2 class="sec-title">森元さんの動き方</h2>
+    <div class="timeline" aria-label="曜日ごとの動き方">
+
+      <div class="step">
+        <span class="step-dot main" aria-hidden="true"></span>
+        <div class="step-card main">
+          <p class="step-label">メイン</p>
+          <p class="step-title">金曜・3号（瀧先生）</p>
+          <div class="step-body">
+            <p>森元さん＋立石さん<strong>同行</strong>の日です。</p>
+            <ul>
+              <li>横について教えるメインの日</li>
+              <li>現場の流れを見せる</li>
+              <li>運転・運搬・手伝い以外は「今は不要」と切る</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-dot" aria-hidden="true"></span>
+        <div class="step-card">
+          <p class="step-label">それ以外</p>
+          <p class="step-title">月4・火2・水6・木4</p>
+          <div class="step-body">
+            <ul>
+              <li>原則、森元さんは<strong>同乗しません</strong></li>
+              <li>立石さんから質問が来たら受ける</li>
+              <li>1日3つくらいで十分、という温度で</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="panels">
+      <div class="panel panel-do">
+        <h3>教えてほしいこと</h3>
+        <ul>
+          <li>事務所での出発前の動き（車・荷物）</li>
+          <li>現場での立ち位置（先生・衛生士の補助）</li>
+          <li>困ったときの連絡先（先生 → 森元 → 浅野）</li>
+        </ul>
+      </div>
+      <div class="panel panel-dont">
+        <h3>教えなくていいこと（初月）</h3>
+        <ul>
+          <li>アポ、SOL、入金</li>
+          <li>カルテ、報告書</li>
+          <li>保険、料金</li>
+          <li>短冊記入</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="pass" aria-label="合格の見方">
+      <h3>合格の見方（初月）</h3>
+      <ul>
+        <li>運転・荷物・手伝いが一人で回る</li>
+        <li>質問が森元さんか現場に届く</li>
+        <li>無理と言える</li>
+      </ul>
+      <p class="note">CO一人前かどうかは9月以降で十分です。</p>
+    </section>
+
+    <section class="schedule" aria-label="8月配置">
+      <h2 class="sec-title">8月・立石さん配置</h2>
+
+      <div class="day-row">
+        <div class="day-label">月</div>
+        <div class="day-info"><strong>4号</strong>（福原先生）<br><span class="sub">立石単独</span></div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">火</div>
+        <div class="day-info"><strong>2号</strong>（佐藤先生）<br><span class="sub">立石単独</span></div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">水</div>
+        <div class="day-info"><strong>6号</strong>（信家先生）<br><span class="sub">立石単独</span></div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">木</div>
+        <div class="day-info"><strong>4号</strong>（杉浦先生）<br><span class="sub">立石単独</span></div>
+      </div>
+      <div class="day-row highlight">
+        <div class="day-label">金</div>
+        <div class="day-info">
+          <strong>3号</strong>（瀧先生）<br>
+          <span class="day-badge">森元さん＋立石同行</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tips" aria-label="立石さんへの事前連絡">
+      <h3>立石さんへの事前連絡</h3>
+      <p>中谷から、絞った内容を事前連絡済みです。</p>
+      <p>「金曜は森元さんと一緒」と書いてあります。</p>
+    </section>
+
+    <section class="tips" aria-label="座学">
+      <h3>座学について</h3>
+      <p>帰院後〜19時までの指南や座学の内容・タイミングは、浅野さん判断で進めます。</p>
+      <p>可能であれば、座学の時間は森元さんにつけていただく、という案もあります。</p>
+    </section>
+
+    <footer class="footer">
+      <p>わからないことがあれば、いつでも中谷に連絡ください</p>
+      <p class="from">おきとう歯科クリニック　中谷</p>
+    </footer>
+
+  </div>
+</body>
+</html>
