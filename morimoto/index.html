@@ -166,6 +166,10 @@
       padding: 2px 8px; border-radius: 6px; margin-top: 4px;
     }
 
+    .day-badge.light {
+      background: var(--accent-soft); color: var(--accent);
+    }
+
     .tips {
       background: var(--bg-card); border: 1px solid var(--line);
       border-radius: var(--radius); padding: 14px; margin-bottom: 28px;
@@ -188,24 +192,24 @@
     <header class="header">
       <p class="clinic-name">おきとう歯科クリニック</p>
       <h1>森元さん<br>立石さん受入のお願い</h1>
-      <p class="sub">7/27にお話しした「量のさじ加減」の続きです。</p>
+      <p class="sub">7/27にお話しした「量のさじ加減」の続きです。（7/31方針変更）</p>
     </header>
 
     <section class="hero" aria-label="役割の本質">
       <p class="hero-label">森元さんの役割</p>
-      <p style="font-size:17px;line-height:1.55;">役割名は「教育担当」ですが、<strong>フルCOの同行研修ではありません。</strong></p>
-      <p style="font-size:17px;margin-top:8px;color:var(--text-muted);">立石さん（医療未経験）向けに、情報量を絞って伴走してください。</p>
+      <p style="font-size:17px;line-height:1.55;">役割名は「教育担当」ですが、<strong>誰かが一緒に号車を回る日はありません。</strong></p>
+      <p style="font-size:17px;margin-top:8px;color:var(--text-muted);">立石さん（医療未経験）から質問が来たら、情報量を絞って答えてください。</p>
       <p class="hero-note">さじ加減が一番わかっているのは森元さん、という前提でのお願いです。</p>
     </section>
 
     <section class="roles" aria-label="役割分担">
       <div class="role-row">
         <div class="role-name">森元さん</div>
-        <div class="role-desc">教育・さじ加減（金3同行／座学も可）</div>
+        <div class="role-desc">質問対応・さじ加減（同行なし／火曜休み）</div>
       </div>
       <div class="role-row">
         <div class="role-name">浅野さん</div>
-        <div class="role-desc">初日フォロー・現場調整</div>
+        <div class="role-desc">火曜・業務見学（佐藤号のあと）</div>
       </div>
       <div class="role-row">
         <div class="role-name">中谷</div>
@@ -219,14 +223,14 @@
       <div class="step">
         <span class="step-dot main" aria-hidden="true"></span>
         <div class="step-card main">
-          <p class="step-label">メイン</p>
-          <p class="step-title">金曜・3号（瀧先生）</p>
+          <p class="step-label">原則</p>
+          <p class="step-title">全曜日・同行なし</p>
           <div class="step-body">
-            <p>森元さん＋立石さん<strong>同行</strong>の日です。</p>
+            <p>信家6号が2人では回れないため、立石さんを全スケジュールに配置。誰も一緒に乗らず、運転・運搬・手伝いのみ。</p>
             <ul>
-              <li>横について教えるメインの日</li>
-              <li>現場の流れを見せる</li>
-              <li>運転・運搬・手伝い以外は「今は不要」と切る</li>
+              <li>森元さんは<strong>同乗しません</strong>（金曜も含む）</li>
+              <li>立石さんから質問が来たら受ける</li>
+              <li>1日3つくらいで十分、という温度で</li>
             </ul>
           </div>
         </div>
@@ -235,14 +239,11 @@
       <div class="step">
         <span class="step-dot" aria-hidden="true"></span>
         <div class="step-card">
-          <p class="step-label">それ以外</p>
-          <p class="step-title">月4・火2・水6・木4</p>
+          <p class="step-label">火曜</p>
+          <p class="step-title">森元さん休み</p>
           <div class="step-body">
-            <ul>
-              <li>原則、森元さんは<strong>同乗しません</strong></li>
-              <li>立石さんから質問が来たら受ける</li>
-              <li>1日3つくらいで十分、という温度で</li>
-            </ul>
+            <p>火曜は森元さんお休みです。</p>
+            <p>立石さんが佐藤2号を回ったあとは、浅野さんの業務見学になります（森元さん側の対応は不要）。</p>
           </div>
         </div>
       </div>
@@ -296,11 +297,11 @@
         <div class="day-label">木</div>
         <div class="day-info"><strong>4号</strong>（杉浦先生）<br><span class="sub">立石単独</span></div>
       </div>
-      <div class="day-row highlight">
+      <div class="day-row">
         <div class="day-label">金</div>
         <div class="day-info">
           <strong>3号</strong>（瀧先生）<br>
-          <span class="day-badge">森元さん＋立石同行</span>
+          <span class="sub">立石単独</span>
         </div>
       </div>
     </section>
@@ -308,13 +309,13 @@
     <section class="tips" aria-label="立石さんへの事前連絡">
       <h3>立石さんへの事前連絡</h3>
       <p>中谷から、絞った内容を事前連絡済みです。</p>
-      <p>「金曜は森元さんと一緒」と書いてあります。</p>
+      <p>方針変更により「金曜は森元さんと一緒」は取り消し。全曜日、同行なしの運転・運搬・手伝いのみです。</p>
+      <p>火曜は佐藤号のあと、浅野さんの業務見学があります。</p>
     </section>
 
     <section class="tips" aria-label="座学">
-      <h3>座学について</h3>
-      <p>帰院後〜19時までの指南や座学の内容・タイミングは、浅野さん判断で進めます。</p>
-      <p>可能であれば、座学の時間は森元さんにつけていただく、という案もあります。</p>
+      <h3>業務見学について</h3>
+      <p>火曜の業務見学は浅野さん担当です。内容・タイミングは浅野さん判断で進めます。</p>
     </section>
 
     <footer class="footer">
