@@ -50,6 +50,7 @@
       padding: 20px 16px 0;
     }
 
+    /* Header */
     .header {
       text-align: center;
       padding: 8px 0 20px;
@@ -75,6 +76,7 @@
       color: var(--text-muted);
     }
 
+    /* Hero card */
     .hero {
       background: var(--bg-card);
       border: 1px solid var(--line);
@@ -91,7 +93,9 @@
       margin-bottom: 8px;
     }
 
-    .hero-list { list-style: none; }
+    .hero-list {
+      list-style: none;
+    }
 
     .hero-list li {
       display: flex;
@@ -128,6 +132,7 @@
       line-height: 1.5;
     }
 
+    /* Section title */
     .sec-title {
       font-size: var(--fs-head);
       font-weight: 600;
@@ -136,6 +141,7 @@
       border-left: 4px solid var(--accent);
     }
 
+    /* Timeline */
     .timeline {
       position: relative;
       padding-left: 36px;
@@ -153,7 +159,11 @@
       border-radius: 2px;
     }
 
-    .step { position: relative; margin-bottom: 20px; }
+    .step {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
     .step:last-child { margin-bottom: 0; }
 
     .step-dot {
@@ -195,10 +205,19 @@
       color: var(--text-muted);
     }
 
-    .step-body ul { margin-top: 6px; padding-left: 1.2em; }
-    .step-body li { margin: 4px 0; }
+    .step-body ul {
+      margin-top: 6px;
+      padding-left: 1.2em;
+    }
 
-    .schedule { margin-bottom: 28px; }
+    .step-body li {
+      margin: 4px 0;
+    }
+
+    /* Schedule */
+    .schedule {
+      margin-bottom: 28px;
+    }
 
     .schedule-note {
       font-size: 15px;
@@ -235,11 +254,25 @@
       line-height: 1.45;
     }
 
-    .day-info strong { font-size: 17px; color: var(--text); }
-    .day-info .car { color: var(--text-muted); font-size: 15px; }
+    .day-info strong {
+      font-size: 17px;
+      color: var(--text);
+    }
 
-    .day-row.highlight { border-color: var(--accent); border-width: 2px; }
-    .day-row.highlight .day-label { background: var(--accent); color: #fff; }
+    .day-info .car {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .day-row.highlight {
+      border-color: var(--accent);
+      border-width: 2px;
+    }
+
+    .day-row.highlight .day-label {
+      background: var(--accent);
+      color: #fff;
+    }
 
     .day-badge {
       display: inline-block;
@@ -251,14 +284,44 @@
       margin-top: 4px;
     }
 
-    .panels { display: grid; gap: 12px; margin-bottom: 28px; }
-    .panel { border-radius: var(--radius); padding: 14px; }
-    .panel-dont { background: var(--dont-bg); border: 1px solid #dcc5c0; }
-    .panel h3 { font-size: 17px; margin-bottom: 8px; }
+    /* Do / Don't */
+    .panels {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .panel {
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+
+    .panel-do {
+      background: var(--do-bg);
+      border: 1px solid #c5d9be;
+    }
+
+    .panel-dont {
+      background: var(--dont-bg);
+      border: 1px solid #dcc5c0;
+    }
+
+    .panel h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .panel-do h3 { color: var(--do); }
     .panel-dont h3 { color: var(--dont); }
-    .panel ul { padding-left: 1.2em; font-size: 16px; }
+
+    .panel ul {
+      padding-left: 1.2em;
+      font-size: 16px;
+    }
+
     .panel li { margin: 4px 0; }
 
+    /* Ask order */
     .ask-flow {
       background: var(--bg-card);
       border: 1px solid var(--line);
@@ -290,7 +353,10 @@
       font-weight: 600;
     }
 
-    .ask-arrow { color: var(--accent); font-weight: 700; }
+    .ask-arrow {
+      color: var(--accent);
+      font-weight: 700;
+    }
 
     .ask-note {
       margin-top: 10px;
@@ -298,8 +364,40 @@
       color: var(--text-muted);
     }
 
-    .contact { margin-bottom: 28px; }
+    /* Contact */
+    .contact {
+      margin-bottom: 28px;
+    }
 
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.contact-item:active {
+      background: var(--accent-soft);
+    }
+
+    .contact-label {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .contact-num {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Tips */
     .tips {
       background: var(--bg-card);
       border: 1px solid var(--line);
@@ -308,7 +406,10 @@
       margin-bottom: 28px;
     }
 
-    .tips h3 { font-size: 17px; margin-bottom: 8px; }
+    .tips h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
 
     .tips p {
       font-size: 16px;
@@ -333,7 +434,11 @@
       margin-bottom: 28px;
     }
 
-    .heat h3 { font-size: 17px; color: var(--heat); margin-bottom: 8px; }
+    .heat h3 {
+      font-size: 17px;
+      color: var(--heat);
+      margin-bottom: 8px;
+    }
 
     .heat p {
       font-size: 16px;
@@ -341,7 +446,11 @@
       margin: 6px 0;
     }
 
-    .lunch-options { display: grid; gap: 8px; margin-top: 10px; }
+    .lunch-options {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
 
     .lunch-opt {
       display: flex;
@@ -354,7 +463,11 @@
       color: var(--text-muted);
     }
 
-    .lunch-letter { flex-shrink: 0; font-weight: 700; color: var(--accent); }
+    .lunch-letter {
+      flex-shrink: 0;
+      font-weight: 700;
+      color: var(--accent);
+    }
 
     .note-card {
       background: var(--bg-card);
@@ -366,6 +479,7 @@
       margin-bottom: 8px;
     }
 
+    /* Footer */
     .footer {
       text-align: center;
       padding: 16px 0 8px;
@@ -374,7 +488,11 @@
       font-size: 15px;
     }
 
-    .footer .from { margin-top: 8px; color: var(--text); font-size: 16px; }
+    .footer .from {
+      margin-top: 8px;
+      color: var(--text);
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -459,7 +577,7 @@
 
     <section class="schedule" aria-label="8月の出勤">
       <h2 class="sec-title">8月の出勤</h2>
-      <p class="schedule-note">土曜・日曜は休みです。</p>
+      <p class="schedule-note">土曜・日曜は休みです。どの日も誰かが一緒に乗る日はありません（運転・運搬・手伝いのみ）。</p>
 
       <div class="day-row">
         <div class="day-label">月</div>
@@ -469,11 +587,12 @@
         </div>
       </div>
 
-      <div class="day-row">
+      <div class="day-row highlight">
         <div class="day-label">火</div>
         <div class="day-info">
           <strong>2号</strong>（佐藤先生）<br>
           <span class="car">車：ピクシス</span>
+          <span class="day-badge">号車のあと、浅野さんの業務見学</span>
         </div>
       </div>
 
@@ -493,12 +612,11 @@
         </div>
       </div>
 
-      <div class="day-row highlight">
+      <div class="day-row">
         <div class="day-label">金</div>
         <div class="day-info">
           <strong>3号</strong>（瀧先生）<br>
           <span class="car">車：シャトル</span>
-          <span class="day-badge">森元さんと一緒</span>
         </div>
       </div>
     </section>
@@ -578,7 +696,8 @@
 
     <section class="tips" aria-label="初日について">
       <h3>全部覚えなくて大丈夫</h3>
-      <p>金曜は森元さんが横について教えます。</p>
+      <p>どの日も、誰かが横について一緒に回る日はありません。</p>
+      <p>火曜は佐藤先生の号車のあと、浅野さんの業務を見学する時間があります。</p>
       <p>それ以外の日も、現場の先生・衛生士が声をかけます。</p>
       <p>迷ったら「今日は運転と荷物と手伝いだけ」と思ってください。</p>
     </section>
