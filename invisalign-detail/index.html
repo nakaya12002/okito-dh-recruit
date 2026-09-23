@@ -26,8 +26,15 @@
 <style>
   body { margin: 0; background: #fffff0; }
   .iv-charts { display: flex; justify-content: center; }
-  .iv-chart { flex: 0 1 480px; max-width: 480px; width: 100%; background: #fff; }
-  .iv-chart svg { width: 100%; height: auto; display: block; }
+  .iv-chart { flex: 0 1 360px; max-width: 360px; width: 100%; background: #fff; text-align: center; padding: 12px 8px 8px; }
+  .iv-chart svg { width: min(100%, 320px); height: auto; display: block; margin: 0 auto; }
+  .iv-chart-title { margin: 0 0 4px; font-weight: 700; font-size: 16px; color: #333; }
+  .iv-legend { list-style: none; margin: 8px 0 0; padding: 0; text-align: left; display: inline-block; }
+  .iv-legend li { margin: 6px 0; font-size: 14px; color: #333; }
+  .iv-swatch { display: inline-block; width: 14px; height: 14px; margin-right: 8px; vertical-align: -2px; }
+  .iv-done { background: #f0a202; }
+  .iv-stop { background: #1F6F7B; }
+  .iv-chart-note { margin: 10px 0 0; font-size: 12px; color: #666; }
 </style>
 </head>
 <body>
@@ -239,7 +246,7 @@
 	                    <p class="fs-5 fw-bold text-center mt-4">2021年4月～2026年9月22日時点 総治療人数 315名</p>
 
                     	<div class="text-center mt-3">
-                    		<div class="iv-charts" role="img" aria-label="315名のうち治療完了310名98.4パーセント、中断5名1.6パーセント"><div class="iv-chart"><svg viewBox="0 0 480 400" width="480" height="400"><rect x="0" y="0" width="480" height="400" fill="#ffffff"/><text x="240" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#333333">315名の内訳</text><path d="M 240.00 82.00 A 86 86 0 1 1 231.37 82.43" fill="none" stroke="#f0a202" stroke-width="32"/><path d="M 231.37 82.43 A 86 86 0 0 1 239.70 82.00" fill="none" stroke="#1F6F7B" stroke-width="32"/><text x="240" y="162" text-anchor="middle" font-size="26" font-weight="700" fill="#333333">98.4%</text><text x="240" y="186" text-anchor="middle" font-size="13" fill="#666666">治療完了</text><rect x="118" y="292" width="14" height="14" fill="#f0a202"/><text x="140" y="304" font-size="14" fill="#333333">治療完了 310名（98.4%）</text><rect x="118" y="320" width="14" height="14" fill="#1F6F7B"/><text x="140" y="332" font-size="14" fill="#333333">中断 5名（1.6%）</text><text x="240" y="368" text-anchor="middle" font-size="12" fill="#666666">2021年4月～2026年9月22日時点・315名のうち</text></svg></div></div>
+                    		<div class="iv-charts" role="img" aria-label="315名のうち治療完了310名98.4パーセント、中断5名1.6パーセント"><div class="iv-chart"><p class="iv-chart-title">315名の内訳</p><svg viewBox="0 0 320 280" width="320" height="280"><path d="M 160.00 58.00 A 92 92 0 1 1 150.77 58.46" fill="none" stroke="#f0a202" stroke-width="34"/><path d="M 150.77 58.46 A 92 92 0 0 1 159.68 58.00" fill="none" stroke="#1F6F7B" stroke-width="34"/><text x="160" y="146" text-anchor="middle" font-size="28" font-weight="700" fill="#333333">98.4%</text><text x="160" y="172" text-anchor="middle" font-size="13" fill="#666666">治療完了</text></svg><ul class="iv-legend"><li><i class="iv-swatch iv-done"></i>治療完了 310名（98.4%）</li><li><i class="iv-swatch iv-stop"></i>中断 5名（1.6%）</li></ul><p class="iv-chart-note">2021年4月～2026年9月22日時点・315名のうち</p></div></div>
                     	</div>
 						<p class="text-center mt-2">
 						総治療人数 315名 治療完了者 310名 完了率 98.4% 中断者 5名（1.6%）
