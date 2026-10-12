@@ -1,6 +1,3 @@
 User-agent: *
 Allow: /
 Disallow: /explain/
-Disallow: /tateishi/
-Disallow: /asano-tateishi-handoff/
-Disallow: /morimoto-tateishi-handoff/
